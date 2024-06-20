@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Recipes</title>
+</head>
+<body>
+    <div class="my_container">
+        <div class="my_nav">
+            <div id="carouselExample" class="carousel slide bg-dark">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{url_for('static', filename = 'img/slide3.jpeg')}}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100 i_height" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{url_for('static', filename = 'img/slide_1.jpeg')}}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100 i_height" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{url_for('static', filename = 'img/slide3.jpeg')}}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100 i_height" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <nav class="navbar" style="background-color: #ebeef1;">
+                <div class="container-fluid">
+                    <a class="navbar-brand">Recipe Share</a>
+                </div>
+            </nav>
+        </div>
+        <div class="my_body">
+            <!-- <div class="main_body"> -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Register</h5>
+                        <form action="/register" method="POST">
+                            <div class="mb-3">
+                                <label for="first_name" class="form-label">First Name:</label>
+                                <input type="text" class="form-control" id="first_name" aria-describedby="firstnameHelp" name="first_name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="last_name" class="form-label">Last Name:</label>
+                                <input type="text" class="form-control" id="last_name" aria-describedby="lastnamelHelp" name="last_name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="text" class="form-control" id="email" aria-describedby="emaillHelp" name="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password:</label>
+                                <input type="password" class="form-control" id="password" aria-describedby="passwordlHelp" name="password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm_password" class="form-label">Confirm Password:</label>
+                                <input type="confirm_password" class="form-control" id="confirm_password" aria-describedby="confirm_passwordlHelp" name="confirm_password">
+                            </div>
+                                <button type="submit" class="btn btn-outline-secondary">Create</button>
+                        </form> <br>
+                        {% if session["form"] == "form1" %}
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                {% if "error" in category %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{message}}!!
+                                </div>
+                                {% endif %}    
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="card" style="height : 22rem;">
+                    <div class="card-body">
+                        <h5>Login</h5>
+                        <form action="/login" method="POST">
+                            <div class="mb-3">
+                                <label for="email_login" class="form-label">Email:</label>
+                                <input type="text" class="form-control" id="email_login" aria-describedby="firstnameHelp" name="email_login">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password_login" class="form-label">Password:</label>
+                                <input type="password" class="form-control" id="password_login" aria-describedby="lastnamelHelp" name="password_login">
+                            </div>
+                                <button type="submit" class="btn btn-outline-secondary">Login</button>
+                        </form> <br>
+                        {% if session["form"] == "form2" %}
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                {% if "error" in category %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{message}}!!
+                                </div>
+                                {% endif %}    
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    {% endif %}
+                    </div>
+                </div>
+            <!-- </div> -->
+        </div>
+    </div>
+    
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</body>
+</html>
