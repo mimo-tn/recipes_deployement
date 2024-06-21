@@ -12,8 +12,11 @@ def register_form():
     session["form"] = "form1"
     if User.validate_register_form(request.form):
         User.save(request.form)
+        data = {"email" : request.form["email"]}
         session['first_name'] = request.form['first_name']
         session['email'] = request.form['email']
+        user = User.get_by_email(data)
+        session['id']=user.id
         return redirect('/login')
     else:
         return redirect('/')
@@ -25,16 +28,17 @@ def login():
             data = {"email" : request.form["email_login"]}
             user = User.get_by_email(data)
             session['first_name'] = user.first_name
+            session['id'] = user.id
             session['email'] = request.form['email_login']
             recipes = Recipe.get_all()
-            return render_template("recipes.html",recipes = recipes)
+            return render_template("recipes.html",recipes = recipes, zip=zip)
         else :
             return redirect('/')   
     else:
         if not 'first_name' in session:
             return redirect('/')
         recipes = Recipe.get_all()
-        return render_template("recipes.html",recipes = recipes)
+        return render_template("recipes.html",recipes = recipes, zip=zip)
 @app.route('/destroy_session')         
 def destroy_session():
     session.clear()		# clears all keys

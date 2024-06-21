@@ -5,7 +5,7 @@ from flask_app.models.recipe import User
 @app.route('/all_recipes')
 def read_recipes():
     recipes = Recipe.get_all()
-    return render_template("recipes.html",recipes = recipes)
+    return render_template("recipes.html",recipes = recipes,  zip=zip)
 @app.route('/recipes/<int:id>')
 def read_one_recipe(id):
     if 'first_name' in session:
